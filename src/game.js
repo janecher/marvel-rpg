@@ -1,5 +1,7 @@
-const storeState = () => {
-  let currentState = {};
+export { storeState, changeGameState, winnerDecision}
+
+const storeState = (gameState) => {
+  let currentState = gameState;
   return (stateChangeFunction = state => state) => {
     const newState = stateChangeFunction(currentState);
     currentState = {...newState};
@@ -23,8 +25,9 @@ const changeGameState = (prop1, prop2, propWinner) => {
 
 // function that stores our game state
 //line26-27 create "game object" with initial values as null for properties player1, player2, winner 
-const initialGameValues = { player1: null, player2: null, winner: null };
-const gameMaster = storeState(initialGameValues);
+
+// const initialGameValues = { player1: null, player2: null, winner: null };
+// const gameMaster = storeState(initialGameValues);
 
 //this function return player object which is stronger and is winner
 const winnerDecision = function(player1, player2){
@@ -41,32 +44,14 @@ const winnerDecision = function(player1, player2){
 //then winner will show up based on players strength
 //using changeGameState as our function factory for the game data
 //line 46 update all properties in game object based on user choose, and result of winnerDecision fucntion
-const updateGameObjectToGameResult = changeGameState("player1", "player2", "winner");
+
+//const updateGameObjectToGameResult = changeGameState("player1", "player2", "winner");//(player1, player2, winnerDecision(player1, player2));
+
 //ironMan amd spiderMan should be player objects, we will get them from marvel.js and user interuction
-const updatedGameObj = gameMaster(updateGameObjectToGameResult(ironMan, spiderMan, winnerDecision(ironMan, spiderMan)));
+
+//const updatedGameObj = gameMaster(updateGameObjectToGameResult(player1, player2, winnerDecision(player1, player2)));
+
 // updatedGameObj = { player1: ironMan, player2: spiderMan, winner: spiderMan };
 
 
-
-// function that stores our game state
-const initialGameValues = { numberOfPlantsAlive: 0, numberOfPlantsDead: 0, playerName: "" };
-const gameMaster = storeState(initialGameValues);
-//using changeState as our function factory for the game data
-const updatePlayerName = changeState("playerName");
-const addNewPlayerToName = updatePlayerName("Sandy");
-const updatedGameObj = gameMaster(addNewPlayerToName);
-// updatedGameObj = { numberOfPlantsAlive: 0, numberOfPlantsDead: 0, playerName: "Sandy" };
-
-const addNewPlant = changeState("numberOfPlantsAlive")(1);
-const updatedGameObjAgain = gameMaster(addNewPlant);
-// updatedGameObj = { numberOfPlantsAlive: 1, numberOfPlantsDead: 0, playerName: "Sandy" };
-export { addPlayer1, addPlayer2}
-
-const changePlayerState = (prop) => {
-  return (value) => {
-    return (state) => ({
-      ...state,
-      [prop] : (state[prop] || 0) + value
-    })
-  }
-}
+//const updatedGameObj = gameMaster(changeGameState("player1", "player2", "winner")(player1Object, player2Object, winnerDecision(player1Object, player2Object)));
