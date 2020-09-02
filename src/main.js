@@ -19,8 +19,8 @@ function GetHero(playerName, arrayOfMarvelObject) {
 
 $(document).ready(function(){
   //29,30
-  const initialGameValues = { player1: null, player2: null, winner: null };
-  const gameMaster = storeState(initialGameValues);
+  //const initialGameValues = { player1: null, player2: null, winner: null };
+  const gameMaster = storeState();
   $("#marvels").submit(function(event){
     event.preventDefault();
     let player1Choose = $("#player1").val(); //Spider-Man
@@ -28,7 +28,7 @@ $(document).ready(function(){
     let player1Object = GetHero(player1Choose, marvelHeros); //marvel object from marvel.js file
     let player2Object = GetHero(player2Choose, marvelHeros);
     const updatedGameObj = gameMaster(changeGameState("player1", "player2", "winner")(player1Object, player2Object, winnerDecision(player1Object, player2Object)));
+    //updatedGameObj = { player1: player1Object, player2: player2Object, winner: player1Object or player2Object denepds who};
     $("#winner").text(updatedGameObj.winner.name);
-
   })
 });
