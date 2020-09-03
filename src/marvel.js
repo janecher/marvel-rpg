@@ -1,5 +1,5 @@
 //This function stores state
-export {marvelHeros}
+export {marvelHeros, ironManAttack, spiderManAttack, blackPantherAttack, thorAttack, thanosAttack, grootAttack, captainMarvelAttack}
 
 const storeState = (initialState) => {
   let currentState = initialState;
@@ -45,12 +45,12 @@ const spiderManAttack = playerAttack("life")(spiderMan.strength/2);
 const blackPantherAttack = playerAttack("life")(blackPanther.strength/2);
 const thorAttack = playerAttack("life")(thor.strength/2);
 const grootAttack = playerAttack("life")(groot.strength/2);
-const capitainMarvelAttack = playerAttack("life")(captainMarvel.strength/2);
+const captainMarvelAttack = playerAttack("life")(captainMarvel.strength/2);
 const thanosAttack = playerAttack("life")(thanos.strength/2);
 
 
-const spiderManVsIronMan = ironManAttack(spiderMan.defense)(spiderMan);
-const spiderManAfterIronManAttack = storeState(spiderManVsIronMan)();
+// const spiderManVsIronMan = ironManAttack(spiderMan.defense)(spiderMan);
+// const spiderManAfterIronManAttack = storeState(spiderManVsIronMan)();
 
 // const ironMan = { name: "Iron Man", life: 10, strength: 6, defense: 8};
 // const spiderMan = { name: "Spider-Man", life: 10, strength: 8, defense: 5};

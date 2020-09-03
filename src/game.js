@@ -1,4 +1,4 @@
-export { storeState, changeGameState, winnerDecision}
+export { storeState, changeGameState}
 
 const storeState = (gameState) => {
   let currentState = gameState;
@@ -11,14 +11,14 @@ const storeState = (gameState) => {
 
 //this function will update all three properties in game object
 //prop1 = player1, prop2 = player2, propWinner = winner
-const changeGameState = (prop1, prop2, propWinner) => {
-  return (value1, value2, winnerValue) => {
+const changeGameState = (prop1, prop2) => {
+  return (value1, value2) => {
     return (state) => ({
       ...state,
       //value will be player "object" - like player1 which is a marvel hero
       [prop1] : value1,
-      [prop2] : value2,
-      [propWinner] : winnerValue
+      [prop2] : value2
+      //[propWinner] : winnerValue
     })
   }
 }
@@ -30,14 +30,14 @@ const changeGameState = (prop1, prop2, propWinner) => {
 // const gameMaster = storeState(initialGameValues);
 
 //this function return player object which is stronger and is winner
-const winnerDecision = function(player1, player2){
-  if(player1.strength > player2.strength)
-  {
-    return player1;
-  } else {
-    return player2;
-  }
-}
+// const winnerDecision = function(player1, player2){
+//   if(player1.strength > player2.strength)
+//   {
+//     return player1;
+//   } else {
+//     return player2;
+//   }
+// }
 
 //we will have a list of players - which are marvel heros
 //user choose two players - player1(for example ironMan) and player2(spiderMan)
