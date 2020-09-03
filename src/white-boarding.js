@@ -6,10 +6,7 @@
 //1 2 3 4 5 6 7 8 9 
 // 3 + 5 + 6 + 9
 
-// 1000 / 5 = 200
-
 const multipleAdder = (number) => {
-  //8
   if (number == 0) {
     return number;
   } else {
@@ -22,14 +19,6 @@ const multipleAdder = (number) => {
   }
 }
 
+console.log(multipleAdder(1000));
 
-console.log(multipleAdder(5));
-// const recurseSumOfNumbersFrom1ToNum = (num) => {
-//   //num = 5
-//   if (num === 0) {
-//     return num;
-//   } else {
-//     return recurseReverse(num-1);
-//   }
-// }
 
