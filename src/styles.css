@@ -1,0 +1,8 @@
+.battle, .winner{
+  display: none;
+}
+
+.jumbotron {
+  height: 300px;
+  background-image: url(assets/images/marvel.jpg);
+}

@@ -1,12 +1,10 @@
-import {storeState, marvelHeros, ironManAttack, spiderManAttack, blackPantherAttack, thorAttack, thanosAttack, grootAttack, captainMarvelAttack } from './marvel.js';
-//import { storeState, changeGameState } from './game.js';
+import { marvelHeros, storePlayerState, heroAttack } from './marvel.js';
+import { storeGameState, changeGameState, winnerDecision } from './game.js';
 import $ from 'jquery';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles.css';
 
-//playerName - is a string from user select option
-//arrayOfMarvelObject - our marvelHeros array imported from marvel.js
 function GetHero(playerName, arrayOfMarvelObject) {
   for(let i=0; i<arrayOfMarvelObject.length; i++)
   {
@@ -17,84 +15,51 @@ function GetHero(playerName, arrayOfMarvelObject) {
   }
 }
 
-function GetAttacker(playerObject) {
-  if(playerObject.name == "Iron Man")
-  {
-    return ironManAttack;
-  }
-  if(playerObject.name == "Spider-Man")
-  {
-    return spiderManAttack;
-  }
-  if(playerObject.name == "Black Panther")
-  {
-    return blackPantherAttack;
-  }
-  if(playerObject.name == "Captain Marvel")
-  {
-    return captainMarvelAttack;
-  }
-  if(playerObject.name == "Groot")
-  {
-    return grootAttack;
-  }
-  if(playerObject.name == "Thor")
-  {
-    return thorAttack;
-  }
-  if(playerObject.name == "Thanos")
-  {
-    return thanosAttack;
-  }
-}
-
 $(document).ready(function(){
-  //const initialGameValues = { player1: null, player2: null, winner: null };
-  const gameMaster = storeState();
-  let player1Object; 
-  let player2Object;
-  $("#battle").hide();
+  const initialGameValues = { player1: null, player2: null, winner: null };
+  const gameMaster = storeGameState(initialGameValues);
+  const initialPlayerValues = { name: "", life: 0, strength: 0, defense: 0};
+  const player1Master = storePlayerState(initialPlayerValues);
+  const player2Master = storePlayerState(initialPlayerValues);
+  let player1;
+  let player2;
+  let game;
   $("#marvels").submit(function(event){
     event.preventDefault();
-    let player1Choose = $("#player1").val(); //Spider-Man
+    let player1Choose = $("#player1").val(); 
     let player2Choose = $("#player2").val();
-    player1Object = GetHero(player1Choose, marvelHeros); //marvel object from marvel.js file
-    player2Object = GetHero(player2Choose, marvelHeros);
-    //const updatedGameObj = gameMaster(changeGameState("player1", "player2")(player1Object, player2Object));
-    //updatedGameObj = { player1: player1Object, player2: player2Object, winner: player1Object or player2Object denepds who};
+    player1 = player1Master(()=>GetHero(player1Choose, marvelHeros)); //marvel object from marvel.js file
+    player2 = player2Master(()=>GetHero(player2Choose, marvelHeros));
+    game = gameMaster(changeGameState("player1", "player2", "winner")(player1, player2, winnerDecision(player1, player2)));
     $("#playerSelect").hide();
-    $("#battle").show();
-    $("#player1Health").text(player1Object.life);
-    $("#player2Health").text(player2Object.life);
+    $(".battle").show();
+    $("#player1Health").text(`${player1.name} life: ${player1.life}`);
+    $("#player2Health").text(`${player2.name} life: ${player2.life}`);
   });
   $("#player1Attack").click(function() {
-    //attckerFunction is marvel hero attack function. like ironManAttack
-    //let attackerFunction = GetAttacker(player1Object); //ironManAttack
-    //console.log(attackerFunction);
-    //const ironManAttack = playerAttack("life")(ironMan.strength/2);
-
-    //calling playerAttack functioan from marvel.js we are changing player2 life property
-    //let player2VSplayer1 = attackerFunction(player2Object.defense)(player2Object);
-    //console.log(player2VSplayer1);
-    //let player2VSplayer1 = playerAttack("life")(ironMan.strength/2)(player2Object.defense)(player2Object);
-
-    // const playerAttack = (prop) => {
-    //   return (strengthAttacker) => {
-    //     return (defense) => {
-    //       return (state) => ({
-    //         ...state,
-    //         [prop]: state[prop] - strengthAttacker + defense
-                //"life": **life property value. for example =** 10 - **if the attacker is ironMaen, then =** 3 + **if the defenser is spiderMan =**5
-                //"life": 10 - 3 + 5 = 12
-    //       })
-    //     }
-    //   }
-    // }
-
-    //using storeState function we change the state of player2 object
-    const player2ObjectAfterAttack = gameMaster(GetAttacker(player1Object)(player2Object.defense));
-    console.log(player2Object);
-    $("#player2Health").text(player2Object.life);
+    player2 = player2Master(heroAttack(player1.strength)(player2.defense));
+    game = gameMaster(changeGameState("player1", "player2", "winner")(player1, player2, winnerDecision(player1, player2)));
+    $("#player2Health").text(`${player2.name} life: ${player2.life}`);
+    if(game.winner != null)
+    {
+      $(".battle").hide();
+      $("#winner").text(`${game.winner.name} win!`);
+      $(".winner").show();
+    }
+  });
+  $("#player2Attack").click(function() {
+    player1 = player1Master(heroAttack(player2.strength)(player1.defense));
+    game = gameMaster(changeGameState("player1", "player2", "winner")(player1, player2, winnerDecision(player1, player2)));
+    $("#player1Health").text(`${player1.name} life: ${player1.life}`);
+    if(game.winner != null)
+    {
+      $(".battle").hide();
+      $("#winner").text(`${game.winner.name} win!`);
+      $(".winner").show();
+    }
+  });
+  $("#goingToStart").click(function() {
+    window.location.reload();
   });
 });
 

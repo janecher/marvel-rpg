@@ -1,39 +1,39 @@
 # _Marvel RPG_
 
-#### _SHORT DESCR_
+#### JavaScript app for simple Marvel RPG, 09/03/2020
 
 #### By _**Evgeniya Chernaya, James Henager, Christine Augustine**_
 
 ## Description
 
-_Long deiscription._
-
-### Specs
-| Spec | Input | Output |
-| :-------------     | :------------- | :------------- |
-
+Simple web application for playing Marvel RPG, practice of functional programming with JavaScript.
 
 ## Setup/Installation Requirements
 
-* _Visit the following link: _
-* _Clone the repository to your desired directory._
-* _OR_
-* _Visit here: _
-
+* Clone the repository to your desired directory (git clone )
+* Do "npm install", then "npm run build" in the terminal
+* Do "npm run start" in the terminal to see the result in browser
 
 ## Known Bugs
 
-_ _
+_No known bags_
+
 ## Support and contact details
 
-_Contact me at...._
+Contact me at _evgenya.chernaya@gmail.com_
 
 ## Technologies Used
 
-_Technology!_
+  * HTML
+  * CSS
+  * JavaScript
+  * JQuery
+  * Bootstrap
+  * Webpack
+  * Jest
 
 ### License
 
-*GPL license distribution*
+_This software is licensed under the MIT license_
 
 Copyright (c) 2020 **_Evgeniya Chernaya, James Henager, Christine Augustine_**

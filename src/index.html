@@ -7,14 +7,13 @@
 </head>
 <body>
   <div class="container">
-    <div class="jumbotron jumbotron-fluid">
-      <h1>Marvel RPG</h1>
+    <div class="jumbotron">
     </div>
     <div id ="playerSelect">
       <form id="marvels">
         <div class="form-group">
           <label for="player1">Player1</label> 
-          <select id="player1" name="player1">
+          <select id="player1" name="player1" class="form-control">
             <option>Spider-Man</option>
             <option>Iron Man</option>
             <option>Black Panther</option>
@@ -30,8 +29,10 @@
             <option value="captainMarvel">Captain Marvel</option>
             <option value="thanos">Thanos</option> -->
           </select>
+        </div>
+        <div class="form-group">
           <label for="player2">Player2</label> 
-          <select id="player2" name="player">
+          <select id="player2" name="player" class="form-control">
             <option>Spider-Man</option>
             <option>Iron Man</option>
             <option>Black Panther</option>
@@ -41,15 +42,18 @@
             <option>Thanos</option>
           </select>
         </div>
-        <button type="submit" class="btn">Let's See who is stronger!</button>
+        <button type="submit" class="btn btn-warning">Let's See who is stronger!</button>
       </form>
-    </div> 
-    
-    <div id="battle">
-      <button type="click" class="btn" id="player1Attack">Player 1 Attack</button>
+    </div>     
+    <div class="battle">
+      <button type="click" class="btn btn-warning" id="player1Attack">Player 1 Attack</button>
       <p id = "player1Health"></p>
-      <button type="click" class="btn" id="player2Attack">Player 2 Attack</button>
+      <button type="click" class="btn btn-warning" id="player2Attack">Player 2 Attack</button>
       <p id = "player2Health"></p>
+    </div>
+    <div class="winner">
+      <p id="winner"></p>
+      <button type="click" class="btn btn-warning" id="goingToStart">Go to start</button>
     </div>
   </div>  
 </body>
